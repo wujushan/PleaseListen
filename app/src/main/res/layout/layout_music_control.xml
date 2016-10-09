@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/divider"
               android:orientation="vertical">
 
     <RelativeLayout
@@ -23,32 +24,36 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/music_control_album"
-            android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@+id/music_control_album"
             >
+
             <TextView
                 android:id="@+id/music_control_musicname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:text="丑八怪"
+                android:textSize="18sp"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="薛之谦"
                 android:layout_alignParentBottom="true"
+                android:text="薛之谦"
                 />
         </RelativeLayout>
+
         <ImageButton
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/ic_play_arrow"
+            android:elevation="3dp"
             />
     </RelativeLayout>
-
 </LinearLayout>

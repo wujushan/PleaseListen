@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.paxsz.pleaselisten.MusicLibrary.Adapter.MusicLibraryPagerAdapter;
 import com.paxsz.pleaselisten.MusicLibrary.Adapter.MusicListAdapter;
 import com.paxsz.pleaselisten.R;
 
@@ -26,10 +27,10 @@ public class MusicLibraryFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     @BindView(R.id.content_main)
     RelativeLayout mContentMain;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
     @BindView(R.id.tablayout)
     TabLayout mTablayout;
+    @BindView(R.id.music_library_viewpager)
+    ViewPager mViewpager;
 
     private MusicListAdapter mAdapter;
     private String mParam1;
@@ -60,6 +61,7 @@ public class MusicLibraryFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -72,11 +74,11 @@ public class MusicLibraryFragment extends Fragment {
     }
 
     private void initView() {
-        mAdapter = new MusicListAdapter();
-//        setHasOptionsMenu(true);
-        mToolbar.setTitle("音乐库");
-        setHasOptionsMenu(true);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("音乐库");
+        MusicLibraryPagerAdapter adaper = new MusicLibraryPagerAdapter(getActivity().getSupportFragmentManager());
+        mViewpager.setAdapter(adaper);
+        mTablayout.setupWithViewPager(mViewpager);
    /*     mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));*/
     }
