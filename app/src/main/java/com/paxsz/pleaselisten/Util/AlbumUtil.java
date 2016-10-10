@@ -56,7 +56,7 @@ public class AlbumUtil {
                 options.inJustDecodeBounds = false;
                 options.inDither = false;
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-                inputStream = resolver.openInputStream(uri);
+
                 return BitmapFactory.decodeStream(inputStream, null, options);
 
             } catch (FileNotFoundException e) {
@@ -123,20 +123,15 @@ public class AlbumUtil {
         Bitmap bm = null;
         try {
             FileDescriptor fileDescriptor = null;
+            Uri uri ;
             if (albumId < 0) {
-//                String uri = "content://media/external/audio/media/" + musicId + "/albumart";
-                Uri uri = Uri.parse("content://media/external/audio/media/" + musicId + "/albumart");
-//                bm = ImageLoader.getInstance().loadImageSync(uri,MusicApplication.mOptions);
-                ParcelFileDescriptor pfd = mContext.getContentResolver().openFileDescriptor(uri, "r");
-                if (pfd != null) {
-                    fileDescriptor = pfd.getFileDescriptor();
-                }
+                uri = Uri.parse("content://media/external/audio/media/" + musicId + "/albumart");
             } else {
-                Uri uri = ContentUris.withAppendedId(albumArtUri, albumId);
-                ParcelFileDescriptor pfd = mContext.getContentResolver().openFileDescriptor(uri, "r");
-                if (pfd != null) {
-                    fileDescriptor = pfd.getFileDescriptor();
-                }
+                uri = ContentUris.withAppendedId(albumArtUri, albumId);
+            }
+            ParcelFileDescriptor pfd = mContext.getContentResolver().openFileDescriptor(uri, "r");
+            if (pfd != null) {
+                fileDescriptor = pfd.getFileDescriptor();
             }
             bm = decodeBitmap(fileDescriptor);
         } catch (FileNotFoundException e) {

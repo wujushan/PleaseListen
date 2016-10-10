@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.paxsz.pleaselisten.MusicApplication;
 import com.paxsz.pleaselisten.MusicLibrary.Mode.MusicInfo;
 import com.paxsz.pleaselisten.R;
 import com.paxsz.pleaselisten.Util.AlbumUtil;
@@ -26,6 +28,7 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.Hold
     private List<MusicInfo> mMusicInfos;
     private Context mContext;
     private AlbumUtil mAlbumUtil;
+    private  String albumUri = "content://media/external/audio/albumart";
     public MusicListAdapter(Context context) {
         mMusicInfos = new ArrayList<>();
         mAlbumUtil = new AlbumUtil(context);
@@ -46,7 +49,15 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.Hold
     public void onBindViewHolder(Holder holder, int position) {
         if (mMusicInfos.size() > 0) {
             MusicInfo musicInfo = mMusicInfos.get(position);
-            holder.album.setImageBitmap(mAlbumUtil.getAlbum(musicInfo.getId(),musicInfo.getAlbumId(),true));
+            if (musicInfo.getAlbumId() <0){
+                String uri = "content://media/external/audio/media/" + musicInfo.getId() + "/albumart";
+                ImageLoader.getInstance().displayImage(uri,holder.album, MusicApplication.mOptions);
+
+            }else {
+                String uri = albumUri + musicInfo.getAlbumId();
+                ImageLoader.getInstance().displayImage(uri,holder.album,MusicApplication.mOptions);
+            }
+//            holder.album.setImageBitmap(mAlbumUtil.getAlbum(musicInfo.getId(),musicInfo.getAlbumId(),true));
             holder.title.setText(musicInfo.getTitle());
             holder.artist.setText(musicInfo.getArtist());
             holder.duration.setText(String.valueOf(musicInfo.getDuration()));
