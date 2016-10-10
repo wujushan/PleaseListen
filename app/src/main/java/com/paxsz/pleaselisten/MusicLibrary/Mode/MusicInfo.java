@@ -11,18 +11,26 @@ public class MusicInfo implements Parcelable {
     private long id;
     private String title;
     private String artist;
+    private String album;
+    private String displayName;
+    private long albumId;
     private String duration;
     private long size;
     private String url;
 
 
+
+
     public MusicInfo() {
     }
 
-    public MusicInfo(long id, String title, String artist, String duration, long size, String url) {
+    public MusicInfo(long id, String title, String artist, String album, String displayName, long albumId, String duration, long size, String url) {
         this.id = id;
         this.title = title;
         this.artist = artist;
+        this.album = album;
+        this.displayName = displayName;
+        this.albumId = albumId;
         this.duration = duration;
         this.size = size;
         this.url = url;
@@ -76,26 +84,29 @@ public class MusicInfo implements Parcelable {
         this.url = url;
     }
 
-    protected MusicInfo(Parcel in) {
-        id = in.readLong();
-        title = in.readString();
-        artist = in.readString();
-        duration = in.readString();
-        size = in.readLong();
-        url = in.readString();
+    public String getAlbum() {
+        return album;
     }
 
-    public static final Creator<MusicInfo> CREATOR = new Creator<MusicInfo>() {
-        @Override
-        public MusicInfo createFromParcel(Parcel in) {
-            return new MusicInfo(in);
-        }
+    public void setAlbum(String album) {
+        this.album = album;
+    }
 
-        @Override
-        public MusicInfo[] newArray(int size) {
-            return new MusicInfo[size];
-        }
-    };
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(long albumId) {
+        this.albumId = albumId;
+    }
 
     @Override
     public int describeContents() {
@@ -104,11 +115,38 @@ public class MusicInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
-        dest.writeString(title);
-        dest.writeString(artist);
-        dest.writeString(duration);
-        dest.writeLong(size);
-        dest.writeString(url);
+        dest.writeLong(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.artist);
+        dest.writeString(this.album);
+        dest.writeString(this.displayName);
+        dest.writeLong(this.albumId);
+        dest.writeString(this.duration);
+        dest.writeLong(this.size);
+        dest.writeString(this.url);
     }
+
+    protected MusicInfo(Parcel in) {
+        this.id = in.readLong();
+        this.title = in.readString();
+        this.artist = in.readString();
+        this.album = in.readString();
+        this.displayName = in.readString();
+        this.albumId = in.readLong();
+        this.duration = in.readString();
+        this.size = in.readLong();
+        this.url = in.readString();
+    }
+
+    public static final Creator<MusicInfo> CREATOR = new Creator<MusicInfo>() {
+        @Override
+        public MusicInfo createFromParcel(Parcel source) {
+            return new MusicInfo(source);
+        }
+
+        @Override
+        public MusicInfo[] newArray(int size) {
+            return new MusicInfo[size];
+        }
+    };
 }

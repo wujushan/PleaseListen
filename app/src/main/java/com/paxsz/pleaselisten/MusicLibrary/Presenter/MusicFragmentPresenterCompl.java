@@ -45,6 +45,9 @@ public class MusicFragmentPresenterCompl implements IMusicFragmentPresenter {
                 musicInfo.setId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
                 musicInfo.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
                 musicInfo.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+                musicInfo.setAlbum(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM)));
+                musicInfo.setDisplayName(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME)));
+                musicInfo.setAlbumId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
                 musicInfo.setDuration(formatTime(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION))));
                 musicInfo.setSize(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.SIZE)));
                 musicInfo.setUrl(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)));

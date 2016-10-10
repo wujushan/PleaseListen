@@ -1,5 +1,6 @@
 package com.paxsz.pleaselisten.MusicLibrary.Adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.paxsz.pleaselisten.MusicLibrary.Mode.MusicInfo;
 import com.paxsz.pleaselisten.R;
+import com.paxsz.pleaselisten.Util.AlbumUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,11 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.Hold
 
 
     private List<MusicInfo> mMusicInfos;
-
-    public MusicListAdapter() {
+    private Context mContext;
+    private AlbumUtil mAlbumUtil;
+    public MusicListAdapter(Context context) {
         mMusicInfos = new ArrayList<>();
+        mAlbumUtil = new AlbumUtil(context);
     }
 
     @Override
@@ -41,9 +45,11 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.Hold
     @Override
     public void onBindViewHolder(Holder holder, int position) {
         if (mMusicInfos.size() > 0) {
-            holder.title.setText(mMusicInfos.get(position).getTitle());
-            holder.artist.setText(mMusicInfos.get(position).getArtist());
-            holder.duration.setText(String.valueOf(mMusicInfos.get(position).getDuration()));
+            MusicInfo musicInfo = mMusicInfos.get(position);
+            holder.album.setImageBitmap(mAlbumUtil.getAlbum(musicInfo.getId(),musicInfo.getAlbumId(),true));
+            holder.title.setText(musicInfo.getTitle());
+            holder.artist.setText(musicInfo.getArtist());
+            holder.duration.setText(String.valueOf(musicInfo.getDuration()));
         }
     }
 

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,14 +63,22 @@ public class MusicFragment extends Fragment implements IMusicFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mFragmentPresenterCompl.getMusicInfos();
+        Log.i(TAG, "onResume: getMusicInfo");
     }
 
     private void initView() {
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new MusicListAdapter();
+        mAdapter = new MusicListAdapter(getActivity());
         mRecyclerview.setAdapter(mAdapter);
+
     }
 
     public MusicFragment() {

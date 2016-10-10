@@ -13,11 +13,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.paxsz.pleaselisten.MusicLibrary.View.fragment.MusicLibraryFragment;
+import com.paxsz.pleaselisten.MusicService.MusicPlayerService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,7 +70,6 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void onResume() {
-        Log.i(TAG, "onResume: start service successfully");
         super.onResume();
     }
 
@@ -126,7 +125,7 @@ public class MainActivity extends BaseActivity
                 case R.id.nav_music_library:
                     replaceFragment(R.id.content_main, MusicLibraryFragment.newInstance());
                     break;
-                case R.id.nav_gallery:
+                case R.id.nav_music_online:
                     break;
                 default:
                     break;

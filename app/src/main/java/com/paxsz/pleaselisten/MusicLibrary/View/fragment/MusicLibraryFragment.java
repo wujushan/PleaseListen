@@ -69,8 +69,13 @@ public class MusicLibraryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_music_library, container, false);
         ButterKnife.bind(this, view);
-        initView();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
     }
 
     private void initView() {

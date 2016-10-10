@@ -28,6 +28,7 @@
             android:layout_marginLeft="6dp"
             android:layout_marginTop="6dp"
             android:layout_toRightOf="@+id/music_control_album"
+
             >
 
             <TextView
@@ -36,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="丑八怪"
                 android:textSize="18sp"
+                android:textColor="@color/white"
                 />
 
             <TextView
@@ -43,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:text="薛之谦"
+                android:textColor="@color/white"
                 />
         </RelativeLayout>
 
